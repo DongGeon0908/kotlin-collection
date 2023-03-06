@@ -22,3 +22,34 @@ fun generateTestData(): List<String> {
 fun testComponentMethod(data: List<String>): String {
     return data.component1()
 }
+
+/**
+ * 중복제거, 가장 첫번째 데이터 기준으로 중복 검사
+ */
+fun testDistinct() {
+    val exCollection = listOf(0, 0, 0, 1, 1, 2, 2)
+    val test = exCollection.distinct()
+
+    test.forEach { println(">>>  $it") }
+}
+
+/**
+ * 중복제거, 가장 첫번째 데이터 기준으로 중복 검사, 특정 케이스만을 대상으로 중복 제거 가능
+ */
+fun testDistinctBy() {
+    val ex1 = TestDto(1, "test1")
+    val ex2 = TestDto(1, "test2")
+    val ex3 = TestDto(1, "test3")
+    val ex4 = TestDto(2, "test3")
+
+    val exCollection = listOf(ex1, ex2, ex3, ex4)
+
+    val test = exCollection.distinctBy { it.value1 }
+
+    test.forEach { println(">>>    " + it.value1 + " " + it.value2) }
+}
+
+class TestDto(
+    val value1: Long,
+    val value2: String
+)
